@@ -778,6 +778,13 @@ span.arrow-badge > span {
     aspect-ratio: 330 / 182;
     height: auto;
   }
+
+  .sales-hero-image img {
+    position: absolute;
+    inset: 0;
+    object-fit: cover;
+    object-position: center center;
+  }
 }
 
 @media (max-width: 1268px) {

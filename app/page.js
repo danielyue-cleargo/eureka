@@ -8,8 +8,8 @@ const ASSETS = {
   iconSearch: "https://www.figma.com/api/mcp/asset/74af8f3e-4447-4a3a-94ed-65d4e6a30050",
   iconBag: "https://www.figma.com/api/mcp/asset/91c8c08a-1088-4da0-98da-d653caa2ad5d",
   iconAccount: "https://www.figma.com/api/mcp/asset/8fb76c27-9fc0-42c5-9956-8f8aa380b15b",
-  heroSales: "https://www.figma.com/api/mcp/asset/506fc3f4-4651-4e03-9859-126a43345497",
-  heroSalesMobile: "https://www.figma.com/api/mcp/asset/daccbe5f-7e4c-4768-b7ee-bc471bbf11f3",
+  heroSales: "https://www.figma.com/api/mcp/asset/c91a43ce-3c5e-42e0-8a88-05fa067b7989",
+  heroSalesMobile: "https://www.figma.com/api/mcp/asset/c91a43ce-3c5e-42e0-8a88-05fa067b7989",
 };
 
 const ROBOT_SERIES = [
