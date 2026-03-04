@@ -417,12 +417,16 @@ button.icon-btn {
   height: 132px;
   border-radius: 12px;
   overflow: hidden;
+  position: relative;
 }
 
 .sales-hero-image img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center center;
   display: block;
 }
 
@@ -651,14 +655,20 @@ span.arrow-badge > span {
 
 .mobile-hero-image {
   border-radius: 12px;
-  height: 180px;
+  width: 100%;
+  aspect-ratio: 330 / 182;
+  height: auto;
   overflow: hidden;
+  position: relative;
 }
 
 .mobile-hero-image img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center center;
   display: block;
 }
 
@@ -762,6 +772,11 @@ span.arrow-badge > span {
 
   .sales-columns {
     grid-template-columns: repeat(3, minmax(120px, 1fr));
+  }
+
+  .sales-hero-image {
+    aspect-ratio: 330 / 182;
+    height: auto;
   }
 }
 
