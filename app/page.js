@@ -162,29 +162,71 @@ const SALES_COLUMNS = [
   },
 ];
 
+const FALLBACKS = {
+  logo: "/fallback/logo.svg",
+  iconSearch: "/fallback/icon-search.svg",
+  iconBag: "/fallback/icon-bag.svg",
+  iconAccount: "/fallback/icon-account.svg",
+  card: "/fallback/card.svg",
+  hero: "/fallback/hero-sales.svg",
+};
+
+function withImageFallback(event, fallbackSrc) {
+  if (event.currentTarget.dataset.fallbackApplied === "true") {
+    return;
+  }
+
+  event.currentTarget.dataset.fallbackApplied = "true";
+  event.currentTarget.src = fallbackSrc;
+}
+
 function Logo({ mobile = false }) {
   if (mobile) {
     return (
       <span className="mobile-logo-slot" aria-label="Eureka">
-        <img className="eureka-logo" src={ASSETS.logoMobile} alt="Eureka" />
+        <img
+          className="eureka-logo"
+          src={ASSETS.logoMobile}
+          alt="Eureka"
+          onError={(event) => withImageFallback(event, FALLBACKS.logo)}
+        />
       </span>
     );
   }
 
-  return <img className="eureka-logo" src={ASSETS.logo} alt="Eureka" />;
+  return (
+    <img
+      className="eureka-logo"
+      src={ASSETS.logo}
+      alt="Eureka"
+      onError={(event) => withImageFallback(event, FALLBACKS.logo)}
+    />
+  );
 }
 
 function HeaderIcons() {
   return (
     <div className="header-icons">
       <button className="icon-btn icon-search" aria-label="Search">
-        <img src={ASSETS.iconSearch} alt="" />
+        <img
+          src={ASSETS.iconSearch}
+          alt=""
+          onError={(event) => withImageFallback(event, FALLBACKS.iconSearch)}
+        />
       </button>
       <button className="icon-btn icon-bag" aria-label="Bag">
-        <img src={ASSETS.iconBag} alt="" />
+        <img
+          src={ASSETS.iconBag}
+          alt=""
+          onError={(event) => withImageFallback(event, FALLBACKS.iconBag)}
+        />
       </button>
       <button className="icon-btn icon-account" aria-label="Account">
-        <img src={ASSETS.iconAccount} alt="" />
+        <img
+          src={ASSETS.iconAccount}
+          alt=""
+          onError={(event) => withImageFallback(event, FALLBACKS.iconAccount)}
+        />
       </button>
     </div>
   );
@@ -202,7 +244,12 @@ function DesktopCard({ item }) {
   return (
     <article className="product-card desktop-card">
       <div className="product-image-wrap">
-        <img src={item.image} alt={item.name} className="product-image" />
+        <img
+          src={item.image}
+          alt={item.name}
+          className="product-image"
+          onError={(event) => withImageFallback(event, FALLBACKS.card)}
+        />
       </div>
       <p className="product-name">{item.name}</p>
       {item.isNew && <span className="product-new">New</span>}
@@ -214,7 +261,12 @@ function MobileCard({ item }) {
   return (
     <article className="product-card mobile-card">
       <div className="product-image-wrap">
-        <img src={item.image} alt={item.name} className="product-image" />
+        <img
+          src={item.image}
+          alt={item.name}
+          className="product-image"
+          onError={(event) => withImageFallback(event, FALLBACKS.card)}
+        />
       </div>
       <p className="product-name">{item.name}</p>
       {item.isNew && <span className="product-new">New</span>}
@@ -226,7 +278,12 @@ function FitScenarioCard({ item, compact = false, noDivider = false }) {
   return (
     <article className={`bestfits-scenario-card${compact ? " is-compact" : ""}`}>
       <button className="bestfits-scenario-image-wrap" type="button" aria-label={item.title}>
-        <img src={item.image} alt={item.title} className="bestfits-scenario-image" />
+        <img
+          src={item.image}
+          alt={item.title}
+          className="bestfits-scenario-image"
+          onError={(event) => withImageFallback(event, FALLBACKS.card)}
+        />
         {item.darkOverlay && <div className="bestfits-scenario-overlay" />}
       </button>
       <div className={`bestfits-scenario-meta${noDivider ? " no-divider" : ""}`}>
@@ -288,7 +345,11 @@ function DesktopVacuumMenu({ vacuumCategory, onCategoryChange }) {
             <div className="fit-grid">
               {HOME_FITS.map((fit) => (
                 <article className="fit-card" key={fit.title}>
-                  <img src={fit.image} alt={fit.title} />
+                  <img
+                    src={fit.image}
+                    alt={fit.title}
+                    onError={(event) => withImageFallback(event, FALLBACKS.card)}
+                  />
                   {fit.darkOverlay && <div className="fit-overlay" />}
                   <p>{fit.title}</p>
                 </article>
@@ -362,7 +423,11 @@ function DesktopSalesMenu() {
 
       <aside className="sales-hero-wrap">
         <div className="sales-hero-image">
-          <img src={ASSETS.heroSales} alt="Spring sale" />
+          <img
+            src={ASSETS.heroSales}
+            alt="Spring sale"
+            onError={(event) => withImageFallback(event, FALLBACKS.hero)}
+          />
         </div>
         <h3>
           Bloom Into Big Savings
@@ -620,7 +685,11 @@ export default function Home() {
                 <section className="mobile-sales-panel">
                   <article className="mobile-hero">
                     <div className="mobile-hero-image">
-                      <img src={ASSETS.heroSalesMobile} alt="Bloom into big savings" />
+                      <img
+                        src={ASSETS.heroSalesMobile}
+                        alt="Bloom into big savings"
+                        onError={(event) => withImageFallback(event, FALLBACKS.hero)}
+                      />
                     </div>
                     <h3>
                       Bloom Into Big Savings
