@@ -66,6 +66,54 @@ const WET_DRY_PRODUCTS = [
   },
 ];
 
+const BEST_FITS_SCENARIOS_DESKTOP = [
+  {
+    title: "Pet Owners",
+    image: "https://www.figma.com/api/mcp/asset/f2737cd0-701c-4fbf-9618-706acd285864",
+  },
+  {
+    title: "Family with Kids",
+    image: "https://www.figma.com/api/mcp/asset/b379ba74-688a-43cd-816c-34d20429c428",
+  },
+  {
+    title: "Large Homes",
+    image: "https://www.figma.com/api/mcp/asset/c50c0e3f-ead1-4f05-91e9-fb09ed08925c",
+  },
+  {
+    title: "Small Apartments",
+    image: "https://www.figma.com/api/mcp/asset/89c66d05-54e2-4624-9f03-ea45db18246c",
+  },
+  {
+    title: "Help me Choose",
+    image: "https://www.figma.com/api/mcp/asset/3438a110-46c6-488f-a7f3-5cb626ada4fb",
+    darkOverlay: true,
+  },
+];
+
+const BEST_FITS_SCENARIOS_MOBILE = [
+  {
+    title: "Pet Owners",
+    image: "https://www.figma.com/api/mcp/asset/45864bf5-0061-4020-9517-f360c153fd58",
+  },
+  {
+    title: "Family with Kids",
+    image: "https://www.figma.com/api/mcp/asset/8f74a6f2-5bfb-4901-8444-8ce601485264",
+  },
+  {
+    title: "Large Homes",
+    image: "https://www.figma.com/api/mcp/asset/7adc58d6-534f-4f3e-989b-e515343aa076",
+  },
+  {
+    title: "Small Apartments",
+    image: "https://www.figma.com/api/mcp/asset/a4f78eba-f4cb-48e2-b90e-68cbbb6b4f3a",
+  },
+  {
+    title: "Help me Choose",
+    image: "https://www.figma.com/api/mcp/asset/4ecbdd2f-b966-4883-a7e7-d27f5f9d7631",
+    darkOverlay: true,
+  },
+];
+
 const HOME_FITS = [
   {
     title: "Pet Owners",
@@ -174,6 +222,23 @@ function MobileCard({ item }) {
   );
 }
 
+function FitScenarioCard({ item, compact = false, noDivider = false }) {
+  return (
+    <article className={`bestfits-scenario-card${compact ? " is-compact" : ""}`}>
+      <button className="bestfits-scenario-image-wrap" type="button" aria-label={item.title}>
+        <img src={item.image} alt={item.title} className="bestfits-scenario-image" />
+        {item.darkOverlay && <div className="bestfits-scenario-overlay" />}
+      </button>
+      <div className={`bestfits-scenario-meta${noDivider ? " no-divider" : ""}`}>
+        <p className="bestfits-scenario-title">{item.title}</p>
+        <span className="bestfits-scenario-arrow" aria-hidden="true">
+          ›
+        </span>
+      </div>
+    </article>
+  );
+}
+
 function DesktopVacuumMenu({ vacuumCategory, onCategoryChange }) {
   const isRobot = vacuumCategory === "robot";
   const isWetDry = vacuumCategory === "wetdry";
@@ -251,20 +316,48 @@ function DesktopVacuumMenu({ vacuumCategory, onCategoryChange }) {
   );
 }
 
+function DesktopBestFitsMenu() {
+  return (
+    <section className="desktop-menu desktop-bestfits-menu">
+      {BEST_FITS_SCENARIOS_DESKTOP.map((scenario) => (
+        <FitScenarioCard item={scenario} key={scenario.title} />
+      ))}
+    </section>
+  );
+}
+
+function SalesColumnBlock({ column }) {
+  if (!column) {
+    return null;
+  }
+
+  return (
+    <article className="sales-column">
+      <h4>{column.title}</h4>
+      <ul>
+        {column.links.map((link) => (
+          <li key={link}>{link}</li>
+        ))}
+      </ul>
+    </article>
+  );
+}
+
 function DesktopSalesMenu() {
+  const featuredSaleColumn = SALES_COLUMNS.find((column) => column.title === "Featured Sale");
+  const offerColumn = SALES_COLUMNS.find((column) => column.title === "Offer");
+  const loyaltyColumn = SALES_COLUMNS.find((column) => column.title === "Loyalty");
+  const newProductLaunchColumn = SALES_COLUMNS.find((column) => column.title === "New Product Launch");
+
   return (
     <section className="desktop-menu desktop-sales-menu">
       <div className="sales-columns">
-        {SALES_COLUMNS.map((column) => (
-          <article className="sales-column" key={column.title}>
-            <h4>{column.title}</h4>
-            <ul>
-              {column.links.map((link) => (
-                <li key={link}>{link}</li>
-              ))}
-            </ul>
-          </article>
-        ))}
+        <div className="sales-primary-column">
+          <SalesColumnBlock column={featuredSaleColumn} />
+          <SalesColumnBlock column={newProductLaunchColumn} />
+        </div>
+        <SalesColumnBlock column={offerColumn} />
+        <SalesColumnBlock column={loyaltyColumn} />
       </div>
 
       <aside className="sales-hero-wrap">
@@ -320,6 +413,7 @@ export default function Home() {
 
   const showDesktopVacuum = desktopMenu === "vacuum";
   const showDesktopSales = desktopMenu === "sales";
+  const showDesktopBestFits = desktopMenu === "bestfits";
 
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -364,14 +458,6 @@ export default function Home() {
             <nav className="desktop-nav" aria-label="Main">
               <button
                 type="button"
-                className={`desktop-nav-item${showDesktopSales ? " is-active" : ""}`}
-                onMouseEnter={() => setDesktopMenu("sales")}
-                onClick={() => setDesktopMenu("sales")}
-              >
-                Sales &amp; Offers
-              </button>
-              <button
-                type="button"
                 className={`desktop-nav-item${showDesktopVacuum ? " is-active" : ""}`}
                 onMouseEnter={() => setDesktopMenu("vacuum")}
                 onClick={() => setDesktopMenu("vacuum")}
@@ -387,8 +473,21 @@ export default function Home() {
               <button type="button" className="desktop-nav-item" onMouseEnter={() => setDesktopMenu("none")}>
                 Support
               </button>
-              <button type="button" className="desktop-nav-item" onMouseEnter={() => setDesktopMenu("none")}>
+              <button
+                type="button"
+                className={`desktop-nav-item${showDesktopBestFits ? " is-active" : ""}`}
+                onMouseEnter={() => setDesktopMenu("bestfits")}
+                onClick={() => setDesktopMenu("bestfits")}
+              >
                 Best Fits Your Home
+              </button>
+              <button
+                type="button"
+                className={`desktop-nav-item${showDesktopSales ? " is-active" : ""}`}
+                onMouseEnter={() => setDesktopMenu("sales")}
+                onClick={() => setDesktopMenu("sales")}
+              >
+                Sales &amp; Offers
               </button>
             </nav>
           </div>
@@ -404,6 +503,7 @@ export default function Home() {
         {showDesktopVacuum && (
           <DesktopVacuumMenu vacuumCategory={vacuumCategory} onCategoryChange={setVacuumCategory} />
         )}
+        {showDesktopBestFits && <DesktopBestFitsMenu />}
         {showDesktopSales && <DesktopSalesMenu />}
       </section>
 
@@ -438,70 +538,8 @@ export default function Home() {
           <div className="mobile-drawer-inner">
             <div className="mobile-drawer-content">
               <MobileMenuRow
-                label="Sales & Offers"
-                rowIndex={0}
-                selected={mobilePrimary === "sales"}
-                onClick={() => {
-                  setMobilePrimary((current) => (current === "sales" ? "none" : "sales"));
-                  setMobileSalesExpanded({
-                    "Featured Sale": false,
-                    Offer: false,
-                    Loyalty: false,
-                    "New Product Launch": false,
-                  });
-                }}
-              />
-
-              {mobilePrimary === "sales" && (
-                <section className="mobile-sales-panel">
-                  <article className="mobile-hero">
-                    <div className="mobile-hero-image">
-                      <img src={ASSETS.heroSalesMobile} alt="Bloom into big savings" />
-                    </div>
-                    <h3>
-                      Bloom Into Big Savings
-                      <br />
-                      Up To EUR400 Off This Spring
-                    </h3>
-                    <button className="menu-link" type="button">
-                      Shop Now <span>›</span>
-                    </button>
-                  </article>
-
-                  <div className="mobile-sub-menu">
-                    {SALES_COLUMNS.map((column, index) => {
-                      const isExpanded = mobileSalesExpanded[column.title];
-
-                      return (
-                        <div key={column.title}>
-                          <MobileMenuRow
-                            label={column.title}
-                            rowIndex={1 + index}
-                            selected={isExpanded}
-                            onClick={() =>
-                              setMobileSalesExpanded((current) => ({
-                                ...current,
-                                [column.title]: !current[column.title],
-                              }))
-                            }
-                          />
-                          {isExpanded && (
-                            <div className="mobile-sub-links">
-                              {column.links.map((link) => (
-                                <p key={link}>{link}</p>
-                              ))}
-                            </div>
-                          )}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </section>
-              )}
-
-              <MobileMenuRow
                 label="Vacuum Cleaner"
-                rowIndex={5}
+                rowIndex={0}
                 selected={mobilePrimary === "vacuum"}
                 onClick={() => {
                   setMobilePrimary((current) => (current === "vacuum" ? "none" : "vacuum"));
@@ -538,10 +576,92 @@ export default function Home() {
                 </section>
               )}
 
-              <MobileMenuRow label="Accessories" rowIndex={6} showArrow={false} onClick={() => {}} />
-              <MobileMenuRow label="About Eureka" rowIndex={7} onClick={() => {}} />
-              <MobileMenuRow label="Support" rowIndex={8} onClick={() => {}} />
-              <MobileMenuRow label="Best Fits Your Home" rowIndex={9} onClick={() => {}} />
+              <MobileMenuRow label="Accessories" rowIndex={1} showArrow={false} onClick={() => {}} />
+              <MobileMenuRow label="About Eureka" rowIndex={2} onClick={() => {}} />
+              <MobileMenuRow label="Support" rowIndex={3} onClick={() => {}} />
+              <MobileMenuRow
+                label="Best Fits Your Home"
+                rowIndex={4}
+                selected={mobilePrimary === "bestfits"}
+                onClick={() => {
+                  setMobilePrimary((current) => (current === "bestfits" ? "none" : "bestfits"));
+                  setMobileSalesExpanded({
+                    "Featured Sale": false,
+                    Offer: false,
+                    Loyalty: false,
+                    "New Product Launch": false,
+                  });
+                }}
+              />
+
+              {mobilePrimary === "bestfits" && (
+                <section className="mobile-bestfits-panel">
+                  {BEST_FITS_SCENARIOS_MOBILE.map((scenario) => (
+                    <FitScenarioCard item={scenario} key={scenario.title} compact noDivider />
+                  ))}
+                </section>
+              )}
+              <MobileMenuRow
+                label="Sales & Offers"
+                rowIndex={5}
+                selected={mobilePrimary === "sales"}
+                onClick={() => {
+                  setMobilePrimary((current) => (current === "sales" ? "none" : "sales"));
+                  setMobileSalesExpanded({
+                    "Featured Sale": false,
+                    Offer: false,
+                    Loyalty: false,
+                    "New Product Launch": false,
+                  });
+                }}
+              />
+
+              {mobilePrimary === "sales" && (
+                <section className="mobile-sales-panel">
+                  <article className="mobile-hero">
+                    <div className="mobile-hero-image">
+                      <img src={ASSETS.heroSalesMobile} alt="Bloom into big savings" />
+                    </div>
+                    <h3>
+                      Bloom Into Big Savings
+                      <br />
+                      Up To EUR400 Off This Spring
+                    </h3>
+                    <button className="menu-link" type="button">
+                      Shop Now <span>›</span>
+                    </button>
+                  </article>
+
+                  <div className="mobile-sub-menu">
+                    {SALES_COLUMNS.map((column, index) => {
+                      const isExpanded = mobileSalesExpanded[column.title];
+
+                      return (
+                        <div key={column.title}>
+                          <MobileMenuRow
+                            label={column.title}
+                            rowIndex={6 + index}
+                            selected={isExpanded}
+                            onClick={() =>
+                              setMobileSalesExpanded((current) => ({
+                                ...current,
+                                [column.title]: !current[column.title],
+                              }))
+                            }
+                          />
+                          {isExpanded && (
+                            <div className="mobile-sub-links">
+                              {column.links.map((link) => (
+                                <p key={link}>{link}</p>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </section>
+              )}
             </div>
 
             <div className="mobile-cta-wrap">
