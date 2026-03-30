@@ -3,89 +3,89 @@
 import { useEffect, useState } from "react";
 
 const ASSETS = {
-  logo: "https://www.figma.com/api/mcp/asset/eba89bc4-7930-40e1-9c06-cbc160d6a6eb",
-  logoMobile: "https://www.figma.com/api/mcp/asset/84de9b3c-4442-406f-aec6-2fbf7ea337b9",
-  iconSearch: "https://www.figma.com/api/mcp/asset/74af8f3e-4447-4a3a-94ed-65d4e6a30050",
-  iconBag: "https://www.figma.com/api/mcp/asset/91c8c08a-1088-4da0-98da-d653caa2ad5d",
-  iconAccount: "https://www.figma.com/api/mcp/asset/8fb76c27-9fc0-42c5-9956-8f8aa380b15b",
-  heroSales: "https://www.figma.com/api/mcp/asset/c91a43ce-3c5e-42e0-8a88-05fa067b7989",
-  heroSalesMobile: "https://www.figma.com/api/mcp/asset/c91a43ce-3c5e-42e0-8a88-05fa067b7989",
+  logo: "https://www.figma.com/api/mcp/asset/da15dba7-18d2-4fd5-8c42-5515a244b48c",
+  logoMobile: "https://www.figma.com/api/mcp/asset/da15dba7-18d2-4fd5-8c42-5515a244b48c",
+  iconSearch: "https://www.figma.com/api/mcp/asset/1028c650-b686-42d6-b21a-cd3eb908ea71",
+  iconBag: "https://www.figma.com/api/mcp/asset/5f93fabd-87b0-48a8-9870-d8e21610b73a",
+  iconAccount: "https://www.figma.com/api/mcp/asset/a38cda0a-8d0d-42aa-9ba1-dc23d67370f7",
+  heroSales: "https://www.figma.com/api/mcp/asset/585af39a-6f6f-43ef-a2f5-5427673a62a9",
+  heroSalesMobile: "https://www.figma.com/api/mcp/asset/585af39a-6f6f-43ef-a2f5-5427673a62a9",
 };
 
 const ROBOT_SERIES = [
   {
     name: "J15 Max Ultra",
-    image: "https://www.figma.com/api/mcp/asset/cf7a32ec-53fd-4605-b036-42ad8092ccd8",
+    image: "https://www.figma.com/api/mcp/asset/b1bd66ca-fc71-4147-a95d-9c2714495fb0",
     isNew: true,
   },
   {
     name: "J15 Evo Ultra",
-    image: "https://www.figma.com/api/mcp/asset/19cbe186-7bcb-40c8-a55f-ea536e883f75",
+    image: "https://www.figma.com/api/mcp/asset/0ac017c7-2584-46a9-a91c-5e4d1d1545bf",
     isNew: true,
   },
   {
     name: "J15 Pro Ultra",
-    image: "https://www.figma.com/api/mcp/asset/9f98cb9f-96a4-4d37-856e-fbf110493aec",
+    image: "https://www.figma.com/api/mcp/asset/d6b374a7-f689-4778-bd9b-e23dcf600e67",
   },
   {
     name: "J15 Ultra",
-    image: "https://www.figma.com/api/mcp/asset/d9bf1f04-654e-477f-a01b-e4430647107f",
+    image: "https://www.figma.com/api/mcp/asset/6a7e3c16-1b6b-4df6-8c8c-8887c3572958",
   },
   {
     name: "J12 Ultra",
-    image: "https://www.figma.com/api/mcp/asset/f0a7d0c8-d88f-497f-845c-041cd667f8fa",
+    image: "https://www.figma.com/api/mcp/asset/ac509f3a-ea30-4c5c-b670-090099a60a90",
   },
 ];
 
 const E_SERIES = [
   {
     name: "E20 Evo Plus",
-    image: "https://www.figma.com/api/mcp/asset/f350a503-9e53-4cb9-8186-8717abeb6f05",
+    image: "https://www.figma.com/api/mcp/asset/ab7a0e75-4e39-4897-8d4b-783fe943562e",
     isNew: true,
   },
   {
     name: "E20 Plus",
-    image: "https://www.figma.com/api/mcp/asset/0ff59afd-fb06-493c-9fd6-3cd96339999a",
+    image: "https://www.figma.com/api/mcp/asset/6fb11eda-c8e9-443d-b6d0-c4326ac10e8e",
   },
 ];
 
 const WET_DRY_PRODUCTS = [
   {
     name: "FloorShine 880",
-    image: "https://www.figma.com/api/mcp/asset/066abf44-18a7-48e4-a347-55e99ef8d03d",
+    image: "https://www.figma.com/api/mcp/asset/f235ea45-1c28-41e5-937e-356ac2f55738",
     isNew: true,
   },
   {
     name: "FloorShine 460",
-    image: "https://www.figma.com/api/mcp/asset/b0286d9a-0e9c-4229-95b8-983c0cd37462",
+    image: "https://www.figma.com/api/mcp/asset/0bbc650c-077e-477d-a9a7-8e8f38189de3",
     isNew: true,
   },
   {
     name: "NEW 400",
-    image: "https://www.figma.com/api/mcp/asset/f689a152-a13d-4a8e-9f94-d9a607550058",
+    image: "https://www.figma.com/api/mcp/asset/b93a605d-4e31-43bc-ab57-d3612c339d3e",
   },
 ];
 
 const BEST_FITS_SCENARIOS_DESKTOP = [
   {
     title: "Pet Owners",
-    image: "https://www.figma.com/api/mcp/asset/f2737cd0-701c-4fbf-9618-706acd285864",
+    image: "https://www.figma.com/api/mcp/asset/05ebce6b-eb49-4abc-9f29-6dd6f614d018",
   },
   {
     title: "Family with Kids",
-    image: "https://www.figma.com/api/mcp/asset/b379ba74-688a-43cd-816c-34d20429c428",
+    image: "https://www.figma.com/api/mcp/asset/48cd117c-d53f-4a7c-8516-934cd4820747",
   },
   {
     title: "Large Homes",
-    image: "https://www.figma.com/api/mcp/asset/c50c0e3f-ead1-4f05-91e9-fb09ed08925c",
+    image: "https://www.figma.com/api/mcp/asset/90698e8f-1939-4675-ae55-686f5e869027",
   },
   {
     title: "Small Apartments",
-    image: "https://www.figma.com/api/mcp/asset/89c66d05-54e2-4624-9f03-ea45db18246c",
+    image: "https://www.figma.com/api/mcp/asset/0ccafb6d-5c8d-4fe0-ac38-ff8070ba5577",
   },
   {
     title: "Help me Choose",
-    image: "https://www.figma.com/api/mcp/asset/3438a110-46c6-488f-a7f3-5cb626ada4fb",
+    image: "https://www.figma.com/api/mcp/asset/8699d491-2801-498e-a1aa-4d13e1b0aec9",
     darkOverlay: true,
   },
 ];
@@ -93,23 +93,23 @@ const BEST_FITS_SCENARIOS_DESKTOP = [
 const BEST_FITS_SCENARIOS_MOBILE = [
   {
     title: "Pet Owners",
-    image: "https://www.figma.com/api/mcp/asset/45864bf5-0061-4020-9517-f360c153fd58",
+    image: "https://www.figma.com/api/mcp/asset/05ebce6b-eb49-4abc-9f29-6dd6f614d018",
   },
   {
     title: "Family with Kids",
-    image: "https://www.figma.com/api/mcp/asset/8f74a6f2-5bfb-4901-8444-8ce601485264",
+    image: "https://www.figma.com/api/mcp/asset/48cd117c-d53f-4a7c-8516-934cd4820747",
   },
   {
     title: "Large Homes",
-    image: "https://www.figma.com/api/mcp/asset/7adc58d6-534f-4f3e-989b-e515343aa076",
+    image: "https://www.figma.com/api/mcp/asset/90698e8f-1939-4675-ae55-686f5e869027",
   },
   {
     title: "Small Apartments",
-    image: "https://www.figma.com/api/mcp/asset/a4f78eba-f4cb-48e2-b90e-68cbbb6b4f3a",
+    image: "https://www.figma.com/api/mcp/asset/0ccafb6d-5c8d-4fe0-ac38-ff8070ba5577",
   },
   {
     title: "Help me Choose",
-    image: "https://www.figma.com/api/mcp/asset/4ecbdd2f-b966-4883-a7e7-d27f5f9d7631",
+    image: "https://www.figma.com/api/mcp/asset/8699d491-2801-498e-a1aa-4d13e1b0aec9",
     darkOverlay: true,
   },
 ];
@@ -117,23 +117,23 @@ const BEST_FITS_SCENARIOS_MOBILE = [
 const HOME_FITS = [
   {
     title: "Pet Owners",
-    image: "https://www.figma.com/api/mcp/asset/d76c8643-4502-401e-9ea4-9fa866339566",
+    image: "https://www.figma.com/api/mcp/asset/c911ad71-6c4e-464b-89b0-88bc92ab2f40",
   },
   {
     title: "Family with Kids",
-    image: "https://www.figma.com/api/mcp/asset/e6063947-4528-442a-ac7f-e8cf80baab8a",
+    image: "https://www.figma.com/api/mcp/asset/6f632982-eae3-4b15-afd2-c224ea621e83",
   },
   {
     title: "Large Homes",
-    image: "https://www.figma.com/api/mcp/asset/2da86e45-4dc0-477b-9fe3-f7fcccebec62",
+    image: "https://www.figma.com/api/mcp/asset/bcc9502a-9ef6-4f7d-ac1f-d7e295c4ef3a",
   },
   {
     title: "Small Apartments",
-    image: "https://www.figma.com/api/mcp/asset/cdcf7962-2564-4233-9493-1b17fb29bce0",
+    image: "https://www.figma.com/api/mcp/asset/9d340bc2-843f-4596-9e2b-dc38239fe8f6",
   },
   {
     title: "Help me Choose",
-    image: "https://www.figma.com/api/mcp/asset/32a8efa6-b926-4cf1-9673-474019d9f977",
+    image: "https://www.figma.com/api/mcp/asset/6c963183-fb3a-45a8-9746-53a6545468c1",
     darkOverlay: true,
   },
 ];
