@@ -370,7 +370,13 @@ a {
 .desktop-sales-column {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 36px;
+}
+
+.desktop-sales-block {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .desktop-sales-column p {
@@ -380,14 +386,17 @@ a {
   font-weight: 700;
 }
 
-.desktop-sales-column .desktop-sales-subhead {
-  margin-top: 20px;
+.desktop-sales-links {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .desktop-sales-column button {
   font-size: 12px;
   line-height: 16.8px;
   font-weight: 400;
+  white-space: nowrap;
 }
 
 .desktop-sales-promo-card {

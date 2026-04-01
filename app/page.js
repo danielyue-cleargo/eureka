@@ -468,26 +468,42 @@ function DesktopMegaPanel({ activeMenu, vacuumCategory, onVacuumCategoryChange }
       <section className="desktop-mega-panel desktop-mega-panel-sales" aria-label="Sales and offers menu">
         <div className="desktop-sales-columns">
           <div className="desktop-sales-column">
-            <p>{featuredSale.title}</p>
-            {featuredSale.links.map((link) => (
-              <button type="button" key={link}>{link}</button>
-            ))}
+            <div className="desktop-sales-block">
+              <p>{featuredSale.title}</p>
+              <div className="desktop-sales-links">
+                {featuredSale.links.map((link) => (
+                  <button type="button" key={link}>{link}</button>
+                ))}
+              </div>
+            </div>
+            <div className="desktop-sales-block">
+              <p>{launch.title}</p>
+              <div className="desktop-sales-links">
+                {launch.links.map((link) => (
+                  <button type="button" key={link}>{link}</button>
+                ))}
+              </div>
+            </div>
           </div>
           <div className="desktop-sales-column">
-            <p>{offer.title}</p>
-            {offer.links.map((link) => (
-              <button type="button" key={link}>{link}</button>
-            ))}
-            <p className="desktop-sales-subhead">{loyalty.title}</p>
-            {loyalty.links.map((link) => (
-              <button type="button" key={link}>{link}</button>
-            ))}
+            <div className="desktop-sales-block">
+              <p>{offer.title}</p>
+              <div className="desktop-sales-links">
+                {offer.links.map((link) => (
+                  <button type="button" key={link}>{link}</button>
+                ))}
+              </div>
+            </div>
           </div>
           <div className="desktop-sales-column">
-            <p>{launch.title}</p>
-            {launch.links.map((link) => (
-              <button type="button" key={link}>{link}</button>
-            ))}
+            <div className="desktop-sales-block">
+              <p>{loyalty.title}</p>
+              <div className="desktop-sales-links">
+                {loyalty.links.map((link) => (
+                  <button type="button" key={link}>{link}</button>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
 
