@@ -381,7 +381,7 @@ a {
 }
 
 .desktop-sales-column .desktop-sales-subhead {
-  margin-top: 8px;
+  margin-top: 20px;
 }
 
 .desktop-sales-column button {
@@ -1720,14 +1720,10 @@ body.is-rail-dragging {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 16.8px;
   font-weight: 700;
   text-align: left;
-}
-
-.mobile-sales-subhead.is-expanded {
-  border-bottom: 0;
 }
 
 .mobile-sales-subitems {

@@ -104,7 +104,7 @@ const DESKTOP_SALES_MENU = {
     },
     {
       title: "Offer",
-      links: ["Subscribe - Get 10% OFF!", "Key Worker Discount", "Student & Youth Saving", "Senior Saving"],
+      links: ["Subscribe- Get 10% OFF!", "Key Worker Discount", "Student & Youth Saving", "Senior Saving"],
     },
     {
       title: "Loyalty",
@@ -132,10 +132,10 @@ const MOBILE_SALES_HERO = {
 };
 
 const MOBILE_SALES_SECTIONS = [
-  { key: "featured", title: "Featured Sale", children: ["Spring Sale", "Bundle & Save"] },
-  { key: "offer", title: "Offer", children: [] },
-  { key: "loyalty", title: "Loyalty", children: [] },
-  { key: "launch", title: "New Product Launch", children: [] },
+  { key: "featured", title: "Featured Sale" },
+  { key: "offer", title: "Offer" },
+  { key: "loyalty", title: "Loyalty" },
+  { key: "launch", title: "New Product Launch" },
 ];
 
 const MOBILE_VACUUM_ROBOT = {
@@ -597,9 +597,7 @@ function MobileHeader({
   isOpen,
   onToggleMenu,
   activePanel,
-  onChangePanel,
-  salesSection,
-  onChangeSalesSection,
+  onChangePanel
 }) {
   return (
     <>
@@ -655,24 +653,12 @@ function MobileHeader({
 
                       <div className="mobile-sales-subsections">
                         {MOBILE_SALES_SECTIONS.map((section) => {
-                          const isSubExpanded = salesSection === section.key;
                           return (
                             <div className="mobile-sales-subsection" key={section.key}>
-                              <button
-                                type="button"
-                                className={`mobile-sales-subhead${isSubExpanded ? " is-expanded" : ""}`}
-                                onClick={() => onChangeSalesSection(isSubExpanded ? null : section.key)}
-                              >
+                              <button type="button" className="mobile-sales-subhead">
                                 <span>{section.title}</span>
-                                <MobileMenuArrow expanded={isSubExpanded} />
+                                <MobileMenuArrow />
                               </button>
-                              {isSubExpanded && section.children.length > 0 && (
-                                <div className="mobile-sales-subitems">
-                                  {section.children.map((link) => (
-                                    <button type="button" key={link}>{link}</button>
-                                  ))}
-                                </div>
-                              )}
                             </div>
                           );
                         })}
@@ -1207,7 +1193,6 @@ export default function HomePage() {
   const [heroProgress, setHeroProgress] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileActivePanel, setMobileActivePanel] = useState(null);
-  const [mobileSalesSection, setMobileSalesSection] = useState("featured");
   const scenarioRailRef = useRef(null);
   const eventRailRef = useRef(null);
   const serviceRailRef = useRef(null);
@@ -1241,7 +1226,6 @@ export default function HomePage() {
   useEffect(() => {
     if (!mobileMenuOpen) {
       setMobileActivePanel(null);
-      setMobileSalesSection("featured");
     }
   }, [mobileMenuOpen]);
 
@@ -1283,8 +1267,6 @@ export default function HomePage() {
           onToggleMenu={() => setMobileMenuOpen((current) => !current)}
           activePanel={mobileActivePanel}
           onChangePanel={setMobileActivePanel}
-          salesSection={mobileSalesSection}
-          onChangeSalesSection={setMobileSalesSection}
         />
       </div>
 
