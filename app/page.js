@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 
 const ICONS = {
   logoDesktop: "https://www.figma.com/api/mcp/asset/46375ff1-bb16-4208-9325-d2e99f08ea52",
-  logoMobile: "https://www.figma.com/api/mcp/asset/bfa8013e-f2d8-4a4b-8f9f-63a9057c5ed1",
+  logoMobile: "https://www.figma.com/api/mcp/asset/4b7138bb-6f64-46ef-a555-b48abffee4dc",
   search: "https://www.figma.com/api/mcp/asset/3a559dd8-5dee-40c3-9f33-5ff4c3faa033",
   bag: "https://www.figma.com/api/mcp/asset/54c8022b-211c-4901-9848-403bacabf602",
   account: "https://www.figma.com/api/mcp/asset/47434cef-d394-4db6-8323-152f8b6854a8",
@@ -268,20 +268,20 @@ const SERVICE_CARDS = [
   {
     title: "24-month Warranty",
     description: "Enjoy complete protection with our 2-year warranty covering repairs and replacements.",
-    image: "https://www.figma.com/api/mcp/asset/9b6e04e6-7ee7-45cd-a6c0-43712712a83b",
-    icon: "https://www.figma.com/api/mcp/asset/efad5575-5fd2-4ca4-89f6-23293985bab9",
+    image: "https://www.figma.com/api/mcp/asset/ad7096ab-fe52-446b-ac05-c9c7ee139584",
+    icon: "https://www.figma.com/api/mcp/asset/cb49b6f9-0c5b-412e-99ba-2773021e4539",
   },
   {
     title: "30-Day Money-Back Guarantee",
-    description: "Shop risk-free with our no-questions-asked 30-day return policy.",
-    image: "https://www.figma.com/api/mcp/asset/eb2f17b2-6de1-42cf-a2ef-5538627ea8b6",
-    icon: "https://www.figma.com/api/mcp/asset/ad16927f-ae19-40b2-ad30-4248a0361762",
+    description: "Shop risk-free with our no-questions-asked 30-day return policy. If you're not completely satisfied, return it for a full refund-it's that simple.",
+    image: "https://www.figma.com/api/mcp/asset/4a31f8f5-078b-4369-ad2c-11ee5b37db4d",
+    icon: "https://www.figma.com/api/mcp/asset/1eab96c8-c325-4ef3-b4fd-ba16c1a27da2",
   },
   {
     title: "Best Price Guarantee",
     description: "Shop with confidence knowing you're always getting the best deal on every purchase.",
-    image: "https://www.figma.com/api/mcp/asset/f2d6bdfd-69a3-44e0-9ae7-73685d8a2bbd",
-    icon: "https://www.figma.com/api/mcp/asset/833e105e-88b0-49c6-b899-d76814bea76c",
+    image: "https://www.figma.com/api/mcp/asset/583f45ca-3c74-4a15-be24-45c1eab713eb",
+    icon: "https://www.figma.com/api/mcp/asset/7ed1d56d-4ddf-4ae3-9706-3a08853d7f4d",
   },
 ];
 
@@ -624,7 +624,11 @@ function MobileHeader({
           aria-label={isOpen ? "Close menu" : "Open menu"}
           onClick={onToggleMenu}
         >
-          {isOpen ? "×" : <img src={ICONS.menu} alt="" />}
+          <span className="menu-btn-bars" aria-hidden="true">
+            <span className="menu-btn-bar" />
+            <span className="menu-btn-bar" />
+            <span className="menu-btn-bar" />
+          </span>
         </button>
         <img
           src={ICONS.logoMobile}
@@ -1211,11 +1215,9 @@ export default function HomePage() {
   const [mobileActivePanel, setMobileActivePanel] = useState(null);
   const scenarioRailRef = useRef(null);
   const eventRailRef = useRef(null);
-  const serviceRailRef = useRef(null);
 
   useDraggableRail(scenarioRailRef);
   useDraggableRail(eventRailRef);
-  useDraggableRail(serviceRailRef);
 
   const duplicatedAwards = useMemo(() => [...AWARD_LOGOS, ...AWARD_LOGOS], []);
 
@@ -1276,8 +1278,8 @@ export default function HomePage() {
         New member can earn 100 Eureka Points! <a href="#">Register now</a>
       </div>
 
-      <div className="desktop-only"><DesktopHeader /></div>
-      <div className="mobile-only">
+      <div className="desktop-only desktop-header-only"><DesktopHeader /></div>
+      <div className="mobile-only mobile-header-only">
         <MobileHeader
           isOpen={mobileMenuOpen}
           onToggleMenu={() => setMobileMenuOpen((current) => !current)}
@@ -1308,8 +1310,10 @@ export default function HomePage() {
 
             <div className="hero-content">
               <p className="hero-eyebrow">{slide.eyebrow}</p>
-              <h1>{slide.title}</h1>
-              <p className="hero-subtitle">{slide.subtitle}</p>
+              <div className="hero-heading-group">
+                <h1>{slide.title}</h1>
+                <p className="hero-subtitle">{slide.subtitle}</p>
+              </div>
               <button type="button" className="pill-btn">{slide.cta}</button>
             </div>
           </article>
@@ -1391,13 +1395,7 @@ export default function HomePage() {
                 </div>
                 <span className="featured-awards-text">Featured at CES &amp; IFA</span>
               </div>
-              <img
-                src={FEATURED_METADATA_ASSETS.divider}
-                alt=""
-                aria-hidden="true"
-                className="featured-award-divider"
-                onError={(event) => withFallback(event, FALLBACKS.card)}
-              />
+              <span className="featured-award-divider" aria-hidden="true" />
               <span className="featured-metadata-note">100+ Years of Innovation Since 1909</span>
             </div>
           </div>
@@ -1473,12 +1471,8 @@ export default function HomePage() {
         <div className="container">
           <div className="section-head with-actions">
             <h2 className="section-title">Why should I buy from the official Eureka online store?</h2>
-            <div className="section-arrows desktop-only-inline">
-              <button type="button" onClick={() => scrollRail(serviceRailRef, "left")} aria-label="Scroll left">‹</button>
-              <button type="button" onClick={() => scrollRail(serviceRailRef, "right")} aria-label="Scroll right">›</button>
-            </div>
           </div>
-          <div className="horizontal-rail service-rail" ref={serviceRailRef}>
+          <div className="horizontal-rail service-rail">
             {SERVICE_CARDS.map((item) => (
               <ServiceCard key={item.title} item={item} />
             ))}
