@@ -47,7 +47,7 @@ a {
 
 .homepage {
   overflow-x: hidden;
-  background: var(--white);
+  background: var(--lighter-grey, #f6f6f6);
 }
 
 .container {
@@ -818,10 +818,11 @@ a {
 }
 
 .category-section {
-  background: var(--white);
+  background: var(--lighter-grey, #f6f6f6);
 }
 
 @media (min-width: 961px) {
+  .robots-section .container,
   .featured-section .container,
   .scenarios-section .container,
   .quiz-banner-section .container,
@@ -899,6 +900,213 @@ a {
   gap: 24px;
 }
 
+.robots-section .section-title {
+  margin-bottom: 16px;
+}
+
+.robots-hero-card {
+  position: relative;
+  width: 100%;
+  max-width: 1600px;
+  height: 640px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #1a1a1a;
+}
+
+.robots-hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.robots-hero-video {
+  z-index: 1;
+  display: block;
+  pointer-events: none;
+}
+
+.robots-hero-content {
+  position: absolute;
+  z-index: 2;
+  left: 64px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(490px, calc(100% - 128px));
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  color: #fff;
+}
+
+.robots-hero-content h3 {
+  margin: 0;
+  font-size: 24px;
+  line-height: 28.8px;
+  font-weight: 700;
+}
+
+.robots-hero-content p {
+  margin: -16px 0 0;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #f5f6f7;
+}
+
+.robots-products-grid {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.robots-product-card {
+  background: #fff;
+  border-radius: var(--radius);
+  overflow: hidden;
+  min-height: 483px;
+  display: flex;
+  flex-direction: column;
+}
+
+.robots-product-media {
+  height: 282px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+}
+
+.robots-product-media picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.robots-product-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center center;
+}
+
+.robots-product-meta {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 0 24px 24px;
+}
+
+.robots-sale-label {
+  color: var(--purple);
+  font-size: 12px;
+  line-height: 16.8px;
+  font-weight: 400;
+}
+
+.robots-product-meta h3 {
+  margin: 0;
+  font-size: 20px;
+  line-height: 22px;
+  font-weight: 700;
+}
+
+.robots-product-meta p {
+  margin: 0;
+  color: #5b5b5b;
+  font-size: 16px;
+  line-height: 20px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.robots-product-meta strong {
+  margin-top: auto;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 400;
+}
+
+.robots-cta-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+.robots-cta-card {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #fff;
+}
+
+.robots-cta-card h3 {
+  margin: 0;
+  font-size: 20px;
+  line-height: 22px;
+  font-weight: 700;
+}
+
+.robots-cta-card-plain {
+  min-height: 108px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 32px;
+}
+
+.robots-cta-arrow {
+  width: 24px;
+  height: 24px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  line-height: 1;
+  flex: 0 0 auto;
+}
+
+.robots-cta-card-image {
+  min-height: 359px;
+}
+
+.robots-cta-card-image img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.robots-cta-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 32px;
+}
+
+.robots-cta-overlay h3 {
+  max-width: 210px;
+}
+
 .featured-card {
   position: relative;
   min-height: 520px;
@@ -913,6 +1121,10 @@ a {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.featured-card-image.mobile {
+  display: none;
 }
 
 .featured-card-overlay {
@@ -1361,7 +1573,7 @@ body.is-rail-dragging {
 .awards-marquee {
   width: 100%;
   overflow: hidden;
-  background: var(--white);
+  background: var(--lighter-grey, #f6f6f6);
 }
 
 .awards-track {
@@ -2022,6 +2234,7 @@ body.is-rail-dragging {
     display: block !important;
   }
 
+  .robots-section .container,
   .featured-section .container,
   .scenarios-section .container,
   .quiz-banner-section .container,
@@ -2111,6 +2324,7 @@ body.is-rail-dragging {
     width: min(var(--container), calc(100% - 40px));
   }
 
+  .robots-section .container,
   .featured-section .container,
   .scenarios-section .container,
   .quiz-banner-section .container,
@@ -2314,6 +2528,86 @@ body.is-rail-dragging {
   .featured-grid {
     grid-template-columns: 1fr;
     gap: 24px;
+  }
+
+  .robots-hero-card {
+    height: 480px;
+  }
+
+  .robots-hero-content {
+    top: 32px;
+    left: 32px;
+    transform: none;
+    width: calc(100% - 64px);
+    gap: 16px;
+  }
+
+  .robots-hero-content h3 {
+    font-size: 24px;
+    line-height: 28.8px;
+  }
+
+  .robots-hero-content p {
+    margin: -8px 0 0;
+  }
+
+  .robots-products-grid {
+    margin-top: 12px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .robots-product-card {
+    min-height: 340px;
+  }
+
+  .robots-product-media {
+    height: 160px;
+    padding: 0;
+  }
+
+  .robots-product-meta {
+    padding: 0 24px 24px;
+    gap: 8px;
+  }
+
+  .robots-sale-label {
+    font-size: 12px;
+    line-height: 16.8px;
+  }
+
+  .robots-product-meta h3 {
+    font-size: 20px;
+    line-height: 22px;
+  }
+
+  .robots-product-meta p {
+    font-size: 16px;
+    line-height: 20px;
+    -webkit-line-clamp: 2;
+  }
+
+  .robots-product-meta strong {
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  .robots-cta-stack {
+    grid-column: 1 / -1;
+    gap: 12px;
+  }
+
+  .robots-cta-card-plain {
+    min-height: 108px;
+    padding: 24px;
+  }
+
+  .robots-cta-card-image {
+    min-height: 240px;
+  }
+
+  .robots-cta-overlay {
+    padding: 24px;
   }
 
   .featured-card {
@@ -2585,6 +2879,16 @@ body.is-rail-dragging {
   .video-card {
     width: 240px;
     min-width: 240px;
+  }
+}
+
+@media (max-width: 768px) {
+  .featured-card-image.desktop {
+    display: none;
+  }
+
+  .featured-card-image.mobile {
+    display: block;
   }
 }
 

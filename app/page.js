@@ -199,6 +199,7 @@ const FEATURED_PRODUCTS = [
     name: "J15 Max Ultra",
     description: "Double cleaning for greater cleanliness.",
     image: "https://www.figma.com/api/mcp/asset/a27982d6-541d-436c-9000-609de5734968",
+    mobileImage: "https://www.figma.com/api/mcp/asset/9b7d999a-7e7d-46ca-af2f-66edaa9ffe9a",
     learnMore: true,
     isNew: true,
   },
@@ -206,13 +207,16 @@ const FEATURED_PRODUCTS = [
     name: "E20 Evo Plus",
     description: "Improved performance, easier maintenance",
     image: "https://www.figma.com/api/mcp/asset/6f929fa9-9337-4ef1-ac40-3788d2b771ee",
+    desktopImage: "https://www.figma.com/api/mcp/asset/744d70c3-abcc-4acf-b919-6da10db5d5e3",
+    mobileImage: "https://www.figma.com/api/mcp/asset/f59d5728-e628-40d2-9a79-81283ef7adc7",
     learnMore: false,
     isNew: true,
   },
   {
     name: "Floorshine 880",
     description: "Discover effortless precision",
-    image: "https://www.figma.com/api/mcp/asset/b236a6c3-a2c9-4e5f-aa45-501f444a65ae",
+    image: "https://www.figma.com/api/mcp/asset/e04e1faa-faf6-40ac-a350-040dab07e98c",
+    mobileImage: "https://www.figma.com/api/mcp/asset/0dcdf9d4-0b41-44fe-b740-b738a80b18c8",
     learnMore: false,
     isNew: true,
   },
@@ -231,6 +235,46 @@ const FEATURED_METADATA_ASSETS = {
   divider: "https://www.figma.com/api/mcp/asset/d92537d9-1574-40b2-928e-c7acf181592a",
 };
 const FEATURED_NEW_BADGE = "https://www.figma.com/api/mcp/asset/ab04608e-6626-4eee-8e4e-fae4d4a1b9b6";
+
+const ROBOTS_HERO = {
+  videoAsset: "/asset/robot.mp4",
+};
+
+const ROBOTS_PRODUCTS = [
+  {
+    name: "Eureka J15 Max Ultra",
+    description: "Double the power for a deeper clean.",
+    price: "€1.199,99 EUR",
+    desktopImage: "https://www.figma.com/api/mcp/asset/012b7a88-4509-482a-8ab2-18ff4ebeac42",
+    mobileImage: "https://www.figma.com/api/mcp/asset/7efb2949-1345-414d-abbd-779079b331df",
+  },
+  {
+    name: "Eureka J15 Pro Ultra",
+    description: "Maximum intelligence, maximum cleanliness.",
+    price: "€849,99 EUR",
+    desktopImage: "https://www.figma.com/api/mcp/asset/721ff8d1-8f43-4279-95d3-ac101a6fa0de",
+    mobileImage: "https://www.figma.com/api/mcp/asset/f8578565-10ba-4446-b584-480464a6ad13",
+  },
+  {
+    name: "Eureka J15 Ultra",
+    description: "Wireless, flawless, not a single corner left out.",
+    price: "€1.199,99 EUR",
+    desktopImage: "https://www.figma.com/api/mcp/asset/f2551275-4b35-4900-be00-d6da6742d67f",
+    mobileImage: "https://www.figma.com/api/mcp/asset/8df12da3-fe93-489a-bde3-effe95a8e595",
+  },
+  {
+    name: "Eureka E20 Evo Plus Saugroboter",
+    description: "Double the power for a deeper clean.",
+    price: "€1.199,99 EUR",
+    desktopImage: "https://www.figma.com/api/mcp/asset/6e88ec30-77ff-4c19-8c49-e91599a20ca4",
+    mobileImage: "https://www.figma.com/api/mcp/asset/e50d490e-b97f-44d6-b42a-d5d1757201be",
+  },
+];
+
+const ROBOTS_COMPARE_CARD = {
+  desktopImage: "https://www.figma.com/api/mcp/asset/4b8fc8a4-fc0e-4cce-a7dc-c74247c59923",
+  mobileImage: "https://www.figma.com/api/mcp/asset/3a471110-10db-4e7b-b8f6-62237111ffc1",
+};
 
 const SCENARIOS = [
   { title: "Pet Owners", image: "https://www.figma.com/api/mcp/asset/71af65c8-3ca4-45d2-825d-c77666e53b57" },
@@ -753,12 +797,16 @@ function MobileHeader({
 function FeaturedCard({ item }) {
   return (
     <article className="featured-card">
-      <img
-        src={item.image}
-        alt={item.name}
-        className="featured-card-image"
-        onError={(event) => withFallback(event, FALLBACKS.card)}
-      />
+      <picture>
+        {item.mobileImage && <source media="(max-width: 960px)" srcSet={item.mobileImage} />}
+        {item.desktopImage && <source media="(min-width: 961px)" srcSet={item.desktopImage} />}
+        <img
+          src={item.image}
+          alt={item.name}
+          className="featured-card-image"
+          onError={(event) => withFallback(event, FALLBACKS.card)}
+        />
+      </picture>
       <div className="featured-card-overlay">
         <h3>{item.name}</h3>
         <p>{item.description}</p>
@@ -784,6 +832,32 @@ function FeaturedCard({ item }) {
         <span>Save €120 + Get Free Accessories Worth €30</span>
       </div>
     </article>
+  );
+}
+
+function RobotsProductCard({ item }) {
+  return (
+    <article className="robots-product-card">
+      <div className="robots-product-media">
+        <picture>
+          {item.mobileImage && <source media="(max-width: 960px)" srcSet={item.mobileImage} />}
+          {item.desktopImage && <source media="(min-width: 961px)" srcSet={item.desktopImage} />}
+          <img src={item.desktopImage} alt={item.name} onError={(event) => withFallback(event, FALLBACKS.card)} />
+        </picture>
+      </div>
+      <div className="robots-product-meta">
+        <span className="robots-sale-label">Sale</span>
+        <h3>{item.name}</h3>
+        <p>{item.description}</p>
+        <strong>{item.price}</strong>
+      </div>
+    </article>
+  );
+}
+
+function RobotsCtaArrow() {
+  return (
+    <span className="robots-cta-arrow" aria-hidden="true">›</span>
   );
 }
 
@@ -1404,6 +1478,59 @@ export default function HomePage() {
             {FEATURED_PRODUCTS.map((item) => (
               <FeaturedCard key={item.name} item={item} />
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section robots-section">
+        <div className="container">
+          <h2 className="section-title">Robots</h2>
+
+          <article className="robots-hero-card">
+            <video
+              className="robots-hero-video"
+              src={ROBOTS_HERO.videoAsset}
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="auto"
+              poster={FALLBACKS.hero}
+              aria-hidden="true"
+            />
+            <div className="robots-hero-content">
+              <h3>J15 Evo Ultra</h3>
+              <p>Epic power, epic achievement</p>
+              <button type="button" className="pill-btn">Shop now</button>
+            </div>
+          </article>
+
+          <div className="robots-products-grid">
+            {ROBOTS_PRODUCTS.map((item) => (
+              <RobotsProductCard key={item.name} item={item} />
+            ))}
+
+            <div className="robots-cta-stack">
+              <article className="robots-cta-card robots-cta-card-plain">
+                <h3>All robot vacuum cleaners</h3>
+                <RobotsCtaArrow />
+              </article>
+
+              <article className="robots-cta-card robots-cta-card-image">
+                <picture>
+                  <source media="(max-width: 960px)" srcSet={ROBOTS_COMPARE_CARD.mobileImage} />
+                  <img
+                    src={ROBOTS_COMPARE_CARD.desktopImage}
+                    alt="Compare robot vacuum cleaners"
+                    onError={(event) => withFallback(event, FALLBACKS.card)}
+                  />
+                </picture>
+                <div className="robots-cta-overlay">
+                  <h3>Compare robot vacuum cleaners</h3>
+                  <RobotsCtaArrow />
+                </div>
+              </article>
+            </div>
           </div>
         </div>
       </section>
